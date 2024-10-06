@@ -35,7 +35,7 @@ UMG 파일 경로 `Step4Demo/Content/MainEvent/MainEvent.umap`
 4. 소켓 기반 연결 제어
 C++ blueprint function을 추가 `TCPSocketConnection.cpp` `TCPSocketConnection.h`. Blocking(synchronous) 연결 대기. 이후에 5초 이내에 결과를 표시.
 
-![접속 실패1.PNG](img/접속 실패1.PNG)
+![접속 실패1.PNG](img/conn-err.PNG)
 > 아쉽게도 시간 관계상 수신된 Socket에 대해 반응하는 서버를 만들지 못했습니다. 그러나 수신은 정상적으로 되어 연결 실패와 사유가 뜨는 로직입니다.
 
 ## Blue print Flow

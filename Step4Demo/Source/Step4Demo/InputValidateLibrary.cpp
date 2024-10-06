@@ -48,15 +48,14 @@ bool IsValidUrl(FString Url) {
 int UInputValidateLibrary::validateInput(FString input) {
     DEFINE_LOG_CATEGORY_STATIC(validateInput, Log, All);
     if (IsValidIP(input)) {
-        UE_LOG(validateInput, Log, TEXT("Executing ip connection")); // Changed here
-        return 0;
+        UE_LOG(validateInput, Log, TEXT("Executing ip connection"));
     }
     else if (IsValidUrl(input)) {
-        UE_LOG(validateInput, Log, TEXT("Executing url connection")); // And here
+        UE_LOG(validateInput, Log, TEXT("Executing url connection"));
         return 1;
     }
     else {
-        UE_LOG(validateInput, Log, TEXT("Invalid")); // And here
+        UE_LOG(validateInput, Log, TEXT("Invalid"));
         return 2;
     }
 }

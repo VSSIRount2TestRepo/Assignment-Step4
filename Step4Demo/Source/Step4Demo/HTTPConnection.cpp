@@ -18,7 +18,6 @@ FString UHTTPConnection::connectWithHTTP(FString input)
 
     Request->ProcessRequest();
 
-    // Get the time of request initiation
     double startTime = FPlatformTime::Seconds();
 
     // Block until the request has completed or timed out
@@ -29,7 +28,6 @@ FString UHTTPConnection::connectWithHTTP(FString input)
         // Get the duration from request initiation until now
         double duration = FPlatformTime::Seconds() - startTime;
 
-        // If duration has exceeded 5 seconds(timeout), stop waiting and return fail message
         if (duration >= timeOut)
         {
             Request->CancelRequest();

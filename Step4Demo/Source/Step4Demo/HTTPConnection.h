@@ -7,7 +7,7 @@
 #include "HTTPConnection.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class STEP4DEMO_API UHTTPConnection : public UBlueprintFunctionLibrary

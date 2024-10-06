@@ -1,15 +1,20 @@
-#include "HTTPConnection.h"
-#include "Runtime/Online/HTTP/Public/Http.h"
-#include "HAL/PlatformTime.h"
+﻿#include "HTTPConnection.h"
+#include "HttpModule.h" 
+#include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetSystemLibrary.h"
+#include "Interfaces/IHttpResponse.h"
+
+DEFINE_LOG_CATEGORY_STATIC(LogHTTPConnection, Log, All);
 
 FString UHTTPConnection::connectWithHTTP(FString input)
 {
+    int timeOut = 10;
     FString url = input;
 
     TSharedRef<IHttpRequest, ESPMode::ThreadSafe> Request = FHttpModule::Get().CreateRequest();
     Request->SetURL(url);
     Request->SetVerb("GET");
-    Request->SetTimeout(5); // Set timeout for 5 seconds
+    Request->SetTimeout(timeOut);
 
     Request->ProcessRequest();
 
@@ -25,9 +30,10 @@ FString UHTTPConnection::connectWithHTTP(FString input)
         double duration = FPlatformTime::Seconds() - startTime;
 
         // If duration has exceeded 5 seconds(timeout), stop waiting and return fail message
-        if (duration >= 5.0)
+        if (duration >= timeOut)
         {
             Request->CancelRequest();
+            UE_LOG(LogHTTPConnection, Log, TEXT("Failed to send HTTP request"));
             return FString(TEXT("접속실패"));
         }
 
@@ -36,10 +42,12 @@ FString UHTTPConnection::connectWithHTTP(FString input)
     }
 
     if (EHttpResponseCodes::IsOk(Request->GetResponse().Get()->GetResponseCode()))
-    {
+    {   
+        UE_LOG(LogHTTPConnection, Log, TEXT("Connection success"));
         return FString(TEXT("접속완료"));
     }
     else {
-        return FString(TEXT("접속실패"));
+        UE_LOG(LogHTTPConnection, Log, TEXT("Connection failed. Rejected connection."));
+        return FString(TEXT("접속실패. 연결 거부"));
     }
 }

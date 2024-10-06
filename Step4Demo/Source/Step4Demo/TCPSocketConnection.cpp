@@ -1,4 +1,4 @@
-#define _WINSOCK_DEPRECATED_NO_WARNINGS
+﻿#define _WINSOCK_DEPRECATED_NO_WARNINGS
 
 #include "TCPSocketConnection.h"
 #include <WinSock2.h>
@@ -25,7 +25,7 @@ public:
 			if (tokens[i].IsNumeric()) { // Check if the string is a valid number
 				bytes[i] = FCString::Atoi(*tokens[i]);
 				if (bytes[i] < 0 || bytes[i] > 255) {
-					return false; // not a valid IP address component
+					return false;
 				}
 			}
 			else return false;

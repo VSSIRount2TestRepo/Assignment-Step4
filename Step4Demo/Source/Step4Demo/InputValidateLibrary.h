@@ -7,7 +7,7 @@
 #include "InputValidateLibrary.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class STEP4DEMO_API UInputValidateLibrary : public UBlueprintFunctionLibrary

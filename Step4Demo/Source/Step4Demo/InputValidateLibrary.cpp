@@ -1,5 +1,6 @@
 #include "InputValidateLibrary.h"
 
+DEFINE_LOG_CATEGORY_STATIC(validateInput, Log, All);
 
 bool IsValidIP(FString IP) {
     TArray<FString> Parts;
@@ -27,7 +28,7 @@ bool IsValidIP(FString IP) {
 
 bool IsValidUrl(FString Url) {
     FString UrlLower = Url.ToLower();
-
+    UE_LOG(validateInput, Log, TEXT("Got input: %s"), *UrlLower);
     // Check if it starts with http:// or https://
     if (!UrlLower.StartsWith(TEXT("http://")) && !UrlLower.StartsWith(TEXT("https://"))) {
         return false;
@@ -45,13 +46,17 @@ bool IsValidUrl(FString Url) {
  */
 
 int UInputValidateLibrary::validateInput(FString input) {
+    DEFINE_LOG_CATEGORY_STATIC(validateInput, Log, All);
     if (IsValidIP(input)) {
+        UE_LOG(validateInput, Log, TEXT("Executing ip connection")); // Changed here
         return 0;
     }
     else if (IsValidUrl(input)) {
+        UE_LOG(validateInput, Log, TEXT("Executing url connection")); // And here
         return 1;
     }
     else {
+        UE_LOG(validateInput, Log, TEXT("Invalid")); // And here
         return 2;
     }
 }
